@@ -1,100 +1,35 @@
-:release-version: 2021.1.1
-:dependency-management-plugin-version: 1.0.11.RELEASE
-= Spring Session BOM image:https://img.shields.io/badge/Revved%20up%20by-Gradle%20Enterprise-06A0CE?logo=Gradle&labelColor=02303A["Revved up by Gradle Enterprise", link="https://ge.spring.io/scans?&search.rootProjectNames=spring-session-bom"]
+== Overview
 
-This repository contains Spring Session Maven Bill of Materials (BOM).
+Spring Session BOM provides dependency management for Spring Session modules.
 
-== Using the BOM with Maven
+Importing the BOM allows applications to use consistent Spring Session dependency versions without specifying versions for each module individually.
 
-With Maven, you need to import the BOM first:
+== Usage
 
-[source,xml,subs="normal"]
-----
-<dependencyManagement>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.session</groupId>
-			<artifactId>spring-session-bom</artifactId>
-			<version>{release-version}</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
-	</dependencies>
-</dependencyManagement>
-----
-
-Notice the use of the `<dependencyManagement>` section and the `import` scope.
-
-Next, add your dependencies to the project without a `<version>`:
+=== Maven
 
 [source,xml]
 ----
-<dependencies>
-	<dependency>
-		<groupId>org.springframework.session</groupId>
-		<artifactId>spring-session-data-redis</artifactId>
-	</dependency>
-</dependencies>
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-bom</artifactId>
+            <version>${spring-session.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 ----
 
-== Using the BOM with Gradle
+=== Gradle
 
-With Gradle's native support for Maven BOMs, import the BOM using:
-
-[source,gradle,subs="normal"]
-----
-dependencies {
-	implementation platform('org.springframework.session:spring-session-bom:{release-version}')
-}
-----
-
-Alternatively, you can use Spring's https://plugins.gradle.org/plugin/io.spring.dependency-management[Dependency management plugin].
-
-Apply the plugin from Gradle Plugin Portal:
-
-[source,gradle,subs="normal"]
-----
-plugins {
-	id 'io.spring.dependency-management' version '{dependency-management-plugin-version}'
-}
-----
-
-Then use it to import the BOM:
-
-[source,gradle,subs="normal"]
+[source,groovy]
 ----
 dependencyManagement {
-	imports {
-		mavenBom 'org.springframework.session:spring-session-bom:{release-version}'
-	}
+    imports {
+        mavenBom "org.springframework.session:spring-session-bom:${springSessionVersion}"
+    }
 }
 ----
-
-Finally, add a dependency to the project without a version:
-
-[source,gradle]
-----
-dependencies {
-	implementation 'org.springframework.session:spring-session-data-redis'
-}
-----
-
-== Getting Help
-* Learn the Spring Session basics - check the https://spring.io/projects/spring-session[Spring Session project site] for documentation, support, samples, and guides.
-* Ask a question - we monitor https://stackoverflow.com[stackoverflow.com] for questions tagged with https://stackoverflow.com/tags/spring-session[`spring-session`].
-
-== Reporting Issues
-If you want to raise an issue, please report it in the appropriate Spring Session project:
-
-* For issues in Spring Session MongoDB, use https://github.com/spring-projects/spring-session-data-mongodb
-* For issues in Spring Session for Apache Geode or VMware Tanzu GemFire please use https://github.com/spring-projects/spring-session-data-geode
-* For issues in Spring Session Data Redis, JDBC, Hazelcast or in core Spring Session please use https://github.com/spring-projects/spring-session
-
-== Code of Conduct
-
-This project adheres to the Contributor Covenant link:CODE_OF_CONDUCT.adoc[code of conduct].
-By participating, you are expected to uphold this code. Please refer to the linked code of conduct for reporting guidance.
-
-== License
-
-Spring Session is Open Source software released under the https://www.apache.org/licenses/LICENSE-2.0.html[Apache 2.0 license].
